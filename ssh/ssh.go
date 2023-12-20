@@ -36,11 +36,12 @@ func PasswordFunc(pwd string) ssh.AuthMethod {
 }
 
 type ForwardInfo struct {
-	Port int
-	IP   string
+	Port int    //远程端口
+	IP   string //远程IP
 }
 
 // Conn 开启 ssh连接
+// forwardInfoMaps key为本地端口
 func Conn(user, sshServer string, forwardInfoMaps map[int]*ForwardInfo, auth ...ssh.AuthMethod) {
 	// SSH配置
 	sshConfig := &ssh.ClientConfig{
