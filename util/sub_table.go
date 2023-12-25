@@ -7,10 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type IBranchQueryTable interface {
-	TablePrefix() string
-}
-
 // BranchQuery 分表查询
 /*
 分表查询
