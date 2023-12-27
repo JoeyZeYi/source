@@ -9,15 +9,20 @@ type DemoComm struct {
 
 type IDemoCommCache interface {
 	ICommCache[DemoComm]
-	GetTest() //额外接口
+	ICommStringCache[DemoComm]
 }
 
 type demoCommCache struct {
 	ICommCache[DemoComm]
+	ICommStringCache[DemoComm]
 }
 
 func NewDemoCommCache(client *redis.Client) IDemoCommCache {
-	return &demoCommCache{ICommCache: NewCommCache[DemoComm](client)}
+	commCache := NewCommCache[DemoComm](client)
+	return &demoCommCache{
+		ICommCache:       NewCommCache[DemoComm](client),
+		ICommStringCache: commCache.String(),
+	}
 }
 
 func (d *demoCommCache) GetTest() {

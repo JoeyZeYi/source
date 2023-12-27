@@ -18,6 +18,7 @@ type ICommStringCache[T any] interface {
 	IncrBy(ctx context.Context, key string, val int64) (int64, error) //自增N
 	Decr(ctx context.Context, key string) (int64, error)              //自减1
 	DecrBy(ctx context.Context, key string, val int64) (int64, error) //自减N
+	Del(ctx context.Context, keys ...string) error
 }
 
 type ICommHashCache[T any] interface {
