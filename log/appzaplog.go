@@ -17,7 +17,7 @@ var (
 
 // InitAppLog InitAppLog根据options的设置,初始化日志系统。
 // 注意默认是测试环境模式,需要设置线上模式的需要设置TestEnv(false)
-func InitAppLog(options ...appZapOption) error {
+func InitAppLog(options ...IAppZapOption) error {
 	var (
 		err   error
 		level zap.AtomicLevel

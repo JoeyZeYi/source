@@ -70,9 +70,12 @@ func (m *Map[K, V]) Maps() map[K]*V {
 			if kOk {
 				result[k] = val
 			}
-
 		}
 		return true
 	})
 	return result
+}
+
+func (m *Map[K, V]) Range(f func(key, value any) bool) {
+	m.m.Range(f)
 }

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/JoeyZeYi/source/log/zap"
 	"github.com/JoeyZeYi/source/log/zap/zapcore"
-	"gopkg.in/natefinch/lumberjack.v2"
+	"github.com/JoeyZeYi/source/lumberjack"
 	"os"
 	"runtime"
 	"time"
@@ -83,10 +83,16 @@ func (u *unixLikeZapLogInit) logInit(config *appZapLogConf) (zap.AtomicLevel, *z
 	writers := []zapcore.WriteSyncer{os.Stderr}
 	output := zapcore.NewMultiWriteSyncer(writers...)
 	if len(config.logPath) != 0 {
+		maxSize := 500
+		if config.maxSize > 0 {
+			maxSize = config.maxSize
+		}
 		output = zapcore.AddSync(&lumberjack.Logger{
-			Filename: config.logPath,
-			MaxSize:  500, // megabytes
-			MaxAge:   5,   // days
+			Filename:  config.logPath,
+			MaxSize:   maxSize, // megabytes
+			MaxAge:    config.maxAge,
+			LocalTime: true,
+			Compress:  config.gzip,
 		})
 	}
 
