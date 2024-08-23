@@ -37,7 +37,7 @@ func PasswordFunc(pwd string) ssh.AuthMethod {
 
 type ForwardInfo struct {
 	Port int    //远程端口
-	IP   string //远程IP
+	IP   string //远程内网IP
 }
 
 // Conn 开启 ssh连接
