@@ -57,7 +57,7 @@ type CommCache[T any] struct {
 	client *redis.Client
 }
 
-func NewCommCache[T any](client *redis.Client) ICommCache[T] {
+func NewCommCache[T any](client *redis.Client) *CommCache[T] {
 	c := &CommCache[T]{client: client}
 	return c
 }
