@@ -50,6 +50,12 @@ func GormLoggerLevel(level gormlogger.LogLevel) IGormLogOption {
 	})
 }
 
+func GormIgnoreRecordNotFoundError(ignoreRecordNotFoundError bool) IGormLogOption {
+	return gormLogOption(func(option *Logger) {
+		option.IgnoreRecordNotFoundError = ignoreRecordNotFoundError
+	})
+}
+
 func GormSendMsg(sendMsg ISendMsg) IGormLogOption {
 	return gormLogOption(func(option *Logger) {
 		option.SendMsg = sendMsg

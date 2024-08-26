@@ -13,7 +13,7 @@ import (
 )
 
 func NewGormDB(addr, userName, pwd, dbName string, openConn, idleConn int, l logger.Interface) (*gorm.DB, error) {
-	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4", userName, pwd, addr, dbName)
+	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", userName, pwd, addr, dbName)
 	directory := gormMysql.Open(dns)
 
 	//logger.Default.LogMode(logger.Info)
