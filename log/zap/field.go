@@ -21,6 +21,7 @@
 package zap
 
 import (
+	"context"
 	"fmt"
 	"math"
 	"time"
@@ -218,6 +219,12 @@ func Any(key string, value interface{}) zapcore.Field {
 		return Object(key, val)
 	case zapcore.ArrayMarshaler:
 		return Array(key, val)
+	case context.Context:
+		v, ok := val.Value("request_id").(string)
+		if ok {
+			return String(key, v)
+		}
+		return Reflect(key, v)
 	case bool:
 		return Bool(key, val)
 	case []bool:
